@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/APIGatewayApp/APIGatewayApp.iml" filepath="$PROJECT_DIR$/APIGatewayApp/APIGatewayApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ConfigServer/ConfigServer.iml" filepath="$PROJECT_DIR$/ConfigServer/ConfigServer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Eureka-Server/Eureka-Server.iml" filepath="$PROJECT_DIR$/Eureka-Server/Eureka-Server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MS-Article/MS-Article.iml" filepath="$PROJECT_DIR$/MS-Article/MS-Article.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Ms-Stock/Ms-Stock.iml" filepath="$PROJECT_DIR$/Ms-Stock/Ms-Stock.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/ms VF avant docker.iml" filepath="$PROJECT_DIR$/.idea/ms VF avant docker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/shared_package/shared.iml" filepath="$PROJECT_DIR$/shared_package/shared.iml" />
+    </modules>
+  </component>
+</project>

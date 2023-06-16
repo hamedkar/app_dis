@@ -1,0 +1,10 @@
+tn\wissalyermani\msarticle\repositories\ArticleRepository.class
+tn\wissalyermani\msarticle\client\StockClient.class
+tn\wissalyermani\msarticle\MsArticleApplication.class
+tn\wissalyermani\msarticle\services\ArticleServiceImpl.class
+tn\wissalyermani\msarticle\configuration\OpenAPIConfig.class
+tn\wissalyermani\msarticle\controllers\ArticleController.class
+tn\wissalyermani\msarticle\entities\Article$ArticleBuilder.class
+tn\wissalyermani\msarticle\entities\Article.class
+tn\wissalyermani\msarticle\mappers\ArticleMapper.class
+tn\wissalyermani\msarticle\services\IArticleService.class

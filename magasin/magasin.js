@@ -39,13 +39,13 @@ const eurekaConfig = {
   },
   instance: {
     app: 'ms-mag',
-    hostName: 'localhost',
+    hostName: 'ms-mag:3000',
     ipAddr: '127.0.0.1',
     port: {
       '$': 3000,
       '@enabled': 'true'
     },
-    vipAddress: 'YOUR_APP_NAME',
+    vipAddress: 'ms-mag',
     dataCenterInfo: {
       '@class': 'com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo',
       name: 'MyOwn'
@@ -128,23 +128,32 @@ async function startServer(mongoURI, port) {
       const { id } = req.params;
       console.log(id);
       const magasin = await magasins.findOne({ id });
-
+  
       if (!magasin) {
         res.status(404).json({ error: 'Magasin not found' });
         return;
       }
-
+  
       const stock = [];
-      for (const id of magasin.stock) {
+      for (const stockId of magasin.stock) {
         try {
-          const stockResponse = await axios.get(`http://localhost:8090/stock/getStock/${id}`);
+          const instances = await eurekaClient.getInstancesByAppId('ms-stock');
+  
+          if (instances.length === 0) {
+            console.error('No instances found for ms-stock');
+            stock.push({ id: stockId, quantity: 'Stock not found' });
+            continue;
+          }
+  
+          const stockUrl = `http://${instances[0].hostName}:${instances[0].port.$}/stock/getStock/${stockId}`;
+          const stockResponse = await axios.get(stockUrl);
           stock.push(stockResponse.data);
         } catch (error) {
-          console.error(`Error retrieving stock for stock ${id}:`, error);
-          stock.push({ id, quantity: 'Stock not found' }); // Add stock not found message to the response
+          console.error(`Error retrieving stock for stock ${stockId}:`, error);
+          stock.push({ id: stockId, quantity: 'Stock not found' });
         }
       }
-
+  
       res.json({ magasin, stock });
     } catch (err) {
       console.error(err);
@@ -153,6 +162,7 @@ async function startServer(mongoURI, port) {
       await client.close();
     }
   });
+  
 
   async function createUniqueIndexes() {
     try {

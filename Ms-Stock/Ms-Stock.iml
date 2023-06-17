@@ -143,7 +143,7 @@
     <orderEntry type="library" name="Maven: org.webjars:swagger-ui:4.14.0" level="project" />
     <orderEntry type="library" name="Maven: org.webjars:webjars-locator-core:0.50" level="project" />
     <orderEntry type="library" name="Maven: io.github.classgraph:classgraph:4.8.149" level="project" />
-    <orderEntry type="module" module-name="shared" />
+    <orderEntry type="library" name="Maven: tn.hamed:shared:1.0-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.data:spring-data-commons:2.7.12" level="project" />
     <orderEntry type="library" name="Maven: javax.persistence:javax.persistence-api:2.2" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:3.1.6" level="project" />

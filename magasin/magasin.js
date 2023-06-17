@@ -3,6 +3,7 @@ const { MongoClient } = require('mongodb');
 const https = require('https');
 const axios = require('axios');
 const mongoose = require('mongoose');
+const { Eureka } = require('eureka-js-client');
 
 const app = express();
 
@@ -26,6 +27,35 @@ https.get(configUrl, (res) => {
 }).on('error', (error) => {
   console.error(error);
 });
+// Eureka configuration
+const eurekaConfig = {
+  eureka: {
+    host: 'localhost',
+    port: 8761,
+    servicePath: '/eureka/apps/',
+    heartbeatInterval: 5000,
+    registryFetchInterval: 5000,
+    preferIpAddress: true
+  },
+  instance: {
+    app: 'ms-mag',
+    hostName: 'localhost',
+    ipAddr: '127.0.0.1',
+    port: {
+      '$': 3000,
+      '@enabled': 'true'
+    },
+    vipAddress: 'YOUR_APP_NAME',
+    dataCenterInfo: {
+      '@class': 'com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo',
+      name: 'MyOwn'
+    }
+  }
+};
+
+const eurekaClient = new Eureka(eurekaConfig);
+
+
 
 async function startServer(mongoURI, port) {
   const client = new MongoClient(mongoURI, { useUnifiedTopology: true });
@@ -143,5 +173,12 @@ async function startServer(mongoURI, port) {
   // Start the server
   app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
+    eurekaClient.start((error) => {
+      if (error) {
+        console.error('Error registering with Eureka:', error);
+      } else {
+        console.log('Registered with Eureka server');
+      }
+    });
   });
 }
